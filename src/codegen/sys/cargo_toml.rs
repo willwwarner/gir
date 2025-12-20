@@ -110,7 +110,7 @@ fn fill_in(root: &mut Table, env: &Env) {
         set_string(deps, "libc", "0.2");
     }
 
-    {
+    if !env.config.static_lib {
         let build_deps = upsert_table(root, "build-dependencies");
         set_string(build_deps, "system-deps", "7");
     }
@@ -136,7 +136,7 @@ fn fill_in(root: &mut Table, env: &Env) {
         });
     }
 
-    {
+    if !env.config.static_lib {
         let meta = upsert_table(root, "package");
         let meta = upsert_table(meta, "metadata");
         let meta = upsert_table(meta, "system-deps");
